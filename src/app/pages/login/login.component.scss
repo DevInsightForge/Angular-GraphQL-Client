@@ -1,0 +1,38 @@
+.login {
+  &__container {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__form {
+    border: 2px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+    min-width: 300px;
+  }
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+
+    label {
+      font-size: 17px;
+    }
+
+    input {
+      font-size: 15px;
+      padding: 5px 8px
+    }
+  }
+
+  &__submitbtn {
+    font-size: 16px;
+    width: 100%;
+    padding: 7px;
+    cursor: pointer;
+  }
+}

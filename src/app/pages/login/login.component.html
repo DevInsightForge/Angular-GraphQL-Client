@@ -1,1 +1,25 @@
-<p>login works!</p>
+<div class="login__container">
+  <form class="login__form" [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="login__inputs">
+      <label for="email"> Email </label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        autofocus
+        tabindex="1"
+      />
+    </div>
+    <div class="login__inputs">
+      <label for="password"> Password </label>
+      <input
+        id="password"
+        type="text"
+        formControlName="password"
+        tabindex="2"
+      />
+    </div>
+
+    <button class="login__submitbtn" type="submit" tabindex="3">Login</button>
+  </form>
+</div>
