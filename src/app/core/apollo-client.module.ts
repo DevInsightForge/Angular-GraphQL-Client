@@ -1,14 +1,14 @@
-import { NgModule, isDevMode } from '@angular/core';
-import { InMemoryCache, from, split } from '@apollo/client/core';
-import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
-import { getMainDefinition } from '@apollo/client/utilities';
-import { Apollo, ApolloModule } from 'apollo-angular';
-import { HttpLink } from 'apollo-angular/http';
-import { createClient } from 'graphql-ws';
+import { NgModule, isDevMode } from "@angular/core";
+import { InMemoryCache, from, split } from "@apollo/client/core";
+import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
+import { getMainDefinition } from "@apollo/client/utilities";
+import { Apollo, ApolloModule } from "apollo-angular";
+import { HttpLink } from "apollo-angular/http";
+import { createClient } from "graphql-ws";
 
 const BASE_URL = isDevMode()
-  ? 'http://localhost:4000/graphql'
-  : 'https://imzihad21.is-a.dev/graphql';
+  ? "http://localhost:4000/graphql"
+  : "https://imzihad21.is-a.dev/graphql";
 
 @NgModule({
   exports: [ApolloModule],
@@ -23,7 +23,7 @@ export class ApolloClientModule {
     // Create a WebSocket link:
     const websocket = new GraphQLWsLink(
       createClient({
-        url: BASE_URL.replace('http', 'ws'),
+        url: BASE_URL.replace("http", "ws"),
       })
     );
 
@@ -31,7 +31,7 @@ export class ApolloClientModule {
       // split based on operation type
       ({ query }) => {
         const { kind, operation }: any = getMainDefinition(query);
-        return kind === 'OperationDefinition' && operation === 'subscription';
+        return kind === "OperationDefinition" && operation === "subscription";
       },
       websocket,
       http
@@ -40,11 +40,11 @@ export class ApolloClientModule {
     apollo.create({
       link: from([connectionLink]),
       cache: new InMemoryCache(),
-      credentials: 'include',
+      credentials: "include",
       defaultOptions: {
         watchQuery: {
-          fetchPolicy: 'network-only',
-          errorPolicy: 'all',
+          fetchPolicy: "network-only",
+          errorPolicy: "all",
         },
       },
     });
