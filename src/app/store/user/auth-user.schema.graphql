@@ -1,0 +1,12 @@
+query UserProfile {
+  userProfile {
+    id
+    email
+    dateJoined
+    lastLogin
+    isActive
+    role
+    isSuperadmin
+    isAdmin
+  }
+}

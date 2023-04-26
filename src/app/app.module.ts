@@ -10,6 +10,7 @@ import { AppRoutingModule } from "./core/app-routing.module";
 import { HomeComponent } from "./pages/home/home.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { RegisterComponent } from "./pages/register/register.component";
+import { StoreModule } from "./store/store.module";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { RegisterComponent } from "./pages/register/register.component";
     HttpClientModule,
     ApolloClientModule,
     ReactiveFormsModule,
+    StoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
