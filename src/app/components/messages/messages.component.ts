@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'app-messages',
-  templateUrl: './messages.component.html',
-  styleUrls: ['./messages.component.scss']
+  selector: "app-messages",
+  templateUrl: "./messages.component.html",
+  styleUrls: ["./messages.component.scss"],
 })
 export class MessagesComponent {
-
+  @Input() chatId: string | null = null;
 }

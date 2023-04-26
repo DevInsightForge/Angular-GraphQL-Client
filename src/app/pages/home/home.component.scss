@@ -1,0 +1,14 @@
+#home {
+  &__container {
+    height: 100%;
+    display: flex;
+  }
+
+  &__chat__list {
+    width: 40%;
+  }
+
+  &__messages {
+    flex-grow: 1;
+  }
+}

@@ -1,1 +1,4 @@
 <p>chats works!</p>
+<div *ngFor="let item of ['1', '2', '3', '4', '5']">
+  <button type="button" (click)="setChatId(item)">{{ item }}</button>
+</div>
