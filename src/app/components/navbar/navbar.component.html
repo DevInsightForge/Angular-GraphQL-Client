@@ -1,5 +1,10 @@
 <nav id="app-navbar" class="navbar navbar-light bg-light">
   <div class="container">
-    <span class="navbar-brand mb-0 h1">Messenger</span>
+    <span class="navbar-brand mb-0 h1">
+      <a [routerLink]="['/']">Messenger</a>
+    </span>
+    <span *ngIf="(user$ | async)?.email">
+      {{ (user$ | async)?.email }}
+    </span>
   </div>
 </nav>
