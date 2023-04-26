@@ -34,5 +34,10 @@
     width: 100%;
     padding: 7px;
     cursor: pointer;
+
+    &:disabled,
+    &[disabled='true'] {
+      cursor: progress !important;
+    }
   }
 }

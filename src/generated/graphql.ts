@@ -196,11 +196,37 @@ export enum UserRole {
   User = 'user'
 }
 
+export type LoginMutationVariables = Exact<{
+  input: LoginInput;
+}>;
+
+
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'JwtTokens', refreshToken: string, accessToken: string } };
+
 export type UserProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type UserProfileQuery = { __typename?: 'Query', userProfile: { __typename?: 'User', id: string, email: string, dateJoined?: any | null, lastLogin?: any | null, isActive?: boolean | null, role?: UserRole | null, isSuperadmin?: boolean | null, isAdmin?: boolean | null } };
 
+export const LoginDocument = gql`
+    mutation Login($input: LoginInput!) {
+  login(input: $input) {
+    refreshToken
+    accessToken
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class LoginGQL extends Apollo.Mutation<LoginMutation, LoginMutationVariables> {
+    override document = LoginDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const UserProfileDocument = gql`
     query UserProfile {
   userProfile {

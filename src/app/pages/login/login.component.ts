@@ -1,5 +1,8 @@
 import { Component } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
+import { Store } from "@ngxs/store";
+import { LoginGQL } from "../../../generated/graphql";
+import { AuthUserActions } from "../../store/user/auth-user.actions";
 
 @Component({
   selector: "app-login",
@@ -7,7 +10,13 @@ import { FormBuilder } from "@angular/forms";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent {
-  constructor(private formBuilder: FormBuilder) {}
+  loginLoading: boolean = false;
+
+  constructor(
+    private store: Store,
+    private formBuilder: FormBuilder,
+    private readonly loginMutation: LoginGQL
+  ) {}
 
   loginForm = this.formBuilder.group({
     email: "admin@admin.com",
@@ -15,6 +24,20 @@ export class LoginComponent {
   });
 
   login() {
-    console.log(this.loginForm.value);
+    if (this.loginForm.value.email && this.loginForm.value.password) {
+      this.loginLoading = true;
+      this.loginMutation
+        .mutate({
+          input: {
+            email: this.loginForm.value.email,
+            password: this.loginForm.value.password,
+          },
+        })
+        .subscribe(({ data }) => {
+          localStorage.setItem("refresh", data?.login?.refreshToken as string);
+          this.loginLoading = false;
+          this.store.dispatch(new AuthUserActions.Reset());
+        });
+    }
   }
 }

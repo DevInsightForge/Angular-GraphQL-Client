@@ -18,6 +18,7 @@ export class ApolloClientModule {
     // Create an http link:
     const http = httpLink?.create({
       uri: BASE_URL,
+      withCredentials: true,
     });
 
     // Create a WebSocket link:

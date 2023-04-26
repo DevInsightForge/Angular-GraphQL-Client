@@ -20,6 +20,13 @@
       />
     </div>
 
-    <button class="login__submitbtn" type="submit" tabindex="3">Login</button>
+    <button
+      class="login__submitbtn"
+      type="submit"
+      tabindex="3"
+      [disabled]="loginLoading"
+    >
+      {{ loginLoading ? "Loading" : "Login" }}
+    </button>
   </form>
 </div>
