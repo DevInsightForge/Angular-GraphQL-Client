@@ -16,8 +16,8 @@ export class LoginComponent {
   constructor(
     private store: Store,
     private formBuilder: FormBuilder,
-    private readonly loginMutation: LoginGQL,
-    private readonly router: Router
+    private loginMutation: LoginGQL,
+    private router: Router
   ) {}
 
   loginForm = this.formBuilder.group({
@@ -39,7 +39,7 @@ export class LoginComponent {
           localStorage.setItem("refresh", data?.login?.refreshToken as string);
           this.loginLoading = false;
           this.store.dispatch(new AuthUserActions.Reset());
-          this.router.parseUrl("/");
+          this.router.navigateByUrl("/");
         });
     }
   }

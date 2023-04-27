@@ -26,6 +26,10 @@ export class AuthUserState implements NgxsOnInit {
   ) {}
 
   private fetchUser(ctx: AuthStateContext) {
+    ctx.patchState({
+      loading: true,
+    });
+
     this.userProfileQuery
       .fetch(
         {},
@@ -37,12 +41,13 @@ export class AuthUserState implements NgxsOnInit {
         next({ data, loading }) {
           ctx.patchState({
             loading: loading,
-            user: data?.userProfile ?? {},
+            user: data?.userProfile,
           });
         },
         error() {
           ctx.patchState({
             loading: false,
+            user: {},
           });
         },
       });

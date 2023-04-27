@@ -26,7 +26,7 @@ export class NavbarComponent {
       if (data?.logout) {
         localStorage.removeItem("refresh");
         this.store.dispatch(new AuthUserActions.Reset());
-        this.router.parseUrl("/login");
+        this.router.navigateByUrl("/login");
       }
     });
   }

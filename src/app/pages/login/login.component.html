@@ -55,7 +55,7 @@
       class="login__submitbtn"
       type="submit"
       tabindex="3"
-      [disabled]="loginLoading || loginForm.controls['email'].errors?.['required'] || loginForm.controls['password'].errors?.['required']"
+      [disabled]="loginLoading"
     >
       {{ loginLoading ? "Loading" : "Login" }}
     </button>
