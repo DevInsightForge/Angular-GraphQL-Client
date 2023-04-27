@@ -8,7 +8,6 @@ import { AuthUserState } from "../store/user/auth-user.state";
   providedIn: "root",
 })
 export class AuthService {
-  @Select(AuthUserState.isAuthenticated) isAuthenticated:
-    | Observable<boolean>
-    | undefined;
+  @Select(AuthUserState.isAuthenticated) isAuthenticated!: Observable<boolean>;
+  @Select(AuthUserState.loading) isLoading!: Observable<boolean>;
 }

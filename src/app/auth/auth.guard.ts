@@ -1,21 +1,22 @@
 import { inject } from "@angular/core";
-import { Router } from "@angular/router";
+import { CanActivateFn, Router } from "@angular/router";
 
-import { map } from "rxjs";
+import { filter, map, switchMap } from "rxjs";
 import { AuthService } from "./auth.service";
 
-export const authGuard = () => {
+export const authGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  return authService?.isAuthenticated?.pipe(
-    map((check) => {
-      if (Boolean(check)) {
+  return authService.isLoading.pipe(
+    filter((loading) => loading === false),
+    switchMap(() => authService.isAuthenticated),
+    map((value) => {
+      if (value === true) {
         return true;
+      } else {
+        return router.parseUrl("/login");
       }
-
-      // Redirect to the login page
-      return router.parseUrl("/login");
     })
   );
 };

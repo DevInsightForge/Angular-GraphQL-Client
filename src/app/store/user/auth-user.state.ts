@@ -36,11 +36,11 @@ export class AuthUserState implements NgxsOnInit {
       .subscribe({
         next({ data, loading }) {
           ctx.patchState({
-            loading,
+            loading: loading,
             user: data?.userProfile ?? {},
           });
         },
-        error(err) {
+        error() {
           ctx.patchState({
             loading: false,
           });
