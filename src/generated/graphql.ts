@@ -59,6 +59,7 @@ export type Mutation = {
   deleteChat: Scalars['Boolean'];
   deleteMessage: Scalars['Boolean'];
   login: JwtTokens;
+  logout?: Maybe<Scalars['String']>;
   refreshAccessToken?: Maybe<Scalars['String']>;
   register: JwtTokens;
   sendMessage: Message;
@@ -82,6 +83,11 @@ export type MutationDeleteMessageArgs = {
 
 export type MutationLoginArgs = {
   input: LoginInput;
+};
+
+
+export type MutationLogoutArgs = {
+  refreshToken: Scalars['String'];
 };
 
 
@@ -196,6 +202,13 @@ export enum UserRole {
   User = 'user'
 }
 
+export type LogoutMutationVariables = Exact<{
+  refreshToken: Scalars['String'];
+}>;
+
+
+export type LogoutMutation = { __typename?: 'Mutation', logout?: string | null };
+
 export type LoginMutationVariables = Exact<{
   input: LoginInput;
 }>;
@@ -208,6 +221,22 @@ export type UserProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type UserProfileQuery = { __typename?: 'Query', userProfile: { __typename?: 'User', id: string, email: string, dateJoined?: any | null, lastLogin?: any | null, isActive?: boolean | null, role?: UserRole | null, isSuperadmin?: boolean | null, isAdmin?: boolean | null } };
 
+export const LogoutDocument = gql`
+    mutation Logout($refreshToken: String!) {
+  logout(refreshToken: $refreshToken)
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class LogoutGQL extends Apollo.Mutation<LogoutMutation, LogoutMutationVariables> {
+    override document = LogoutDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const LoginDocument = gql`
     mutation Login($input: LoginInput!) {
   login(input: $input) {

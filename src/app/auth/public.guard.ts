@@ -8,13 +8,13 @@ export const publicGuard = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  return authService?.isAuthenticated?.pipe(
+  return authService.isAuthenticated?.pipe(
     map((check) => {
       if (!Boolean(check)) {
         return true;
       }
 
-      // Redirect to the home page
+      // Redirect to the login page
       return router.parseUrl("/");
     })
   );

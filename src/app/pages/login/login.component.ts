@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 import { Store } from "@ngxs/store";
 import { LoginGQL } from "../../../generated/graphql";
 import { AuthUserActions } from "../../store/user/auth-user.actions";
@@ -15,12 +16,13 @@ export class LoginComponent {
   constructor(
     private store: Store,
     private formBuilder: FormBuilder,
-    private readonly loginMutation: LoginGQL
+    private readonly loginMutation: LoginGQL,
+    private readonly router: Router
   ) {}
 
   loginForm = this.formBuilder.group({
-    email: "admin@admin.com",
-    password: "Admin@123",
+    email: ["", Validators.required],
+    password: ["", Validators.required],
   });
 
   login() {
@@ -37,6 +39,7 @@ export class LoginComponent {
           localStorage.setItem("refresh", data?.login?.refreshToken as string);
           this.loginLoading = false;
           this.store.dispatch(new AuthUserActions.Reset());
+          this.router.parseUrl("/");
         });
     }
   }

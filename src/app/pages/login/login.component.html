@@ -3,28 +3,59 @@
     <div class="login__inputs">
       <label for="email"> Email </label>
       <input
+        required
         id="email"
         type="email"
         formControlName="email"
         autofocus
         tabindex="1"
       />
+      <div
+        *ngIf="
+          loginForm.controls['email'].invalid &&
+          (loginForm.controls['email'].dirty ||
+            loginForm.controls['email'].touched)
+        "
+      >
+        <p
+          *ngIf="loginForm.controls['email'].errors?.['required']"
+          class="alert alert-danger py-0"
+        >
+          Email is required.
+        </p>
+      </div>
     </div>
+
     <div class="login__inputs">
       <label for="password"> Password </label>
       <input
+        required
         id="password"
-        type="text"
+        type="password"
         formControlName="password"
         tabindex="2"
       />
+      <div
+        *ngIf="
+          loginForm.controls['password'].invalid &&
+          (loginForm.controls['password'].dirty ||
+            loginForm.controls['password'].touched)
+        "
+      >
+        <p
+          *ngIf="loginForm.controls['password'].errors?.['required']"
+          class="alert alert-danger py-0"
+        >
+          Password is required.
+        </p>
+      </div>
     </div>
 
     <button
       class="login__submitbtn"
       type="submit"
       tabindex="3"
-      [disabled]="loginLoading"
+      [disabled]="loginLoading || loginForm.controls['email'].errors?.['required'] || loginForm.controls['password'].errors?.['required']"
     >
       {{ loginLoading ? "Loading" : "Login" }}
     </button>

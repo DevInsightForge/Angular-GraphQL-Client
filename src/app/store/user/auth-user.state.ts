@@ -33,11 +33,18 @@ export class AuthUserState implements NgxsOnInit {
           fetchPolicy: "network-only",
         }
       )
-      .subscribe(({ data, loading }) => {
-        ctx.patchState({
-          loading,
-          user: data?.userProfile ?? {},
-        });
+      .subscribe({
+        next({ data, loading }) {
+          ctx.patchState({
+            loading,
+            user: data?.userProfile ?? {},
+          });
+        },
+        error(err) {
+          ctx.patchState({
+            loading: false,
+          });
+        },
       });
   }
 
