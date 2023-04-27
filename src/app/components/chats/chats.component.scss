@@ -1,0 +1,23 @@
+#chat {
+  &__container {
+    height: 100%;
+    padding: 10px;
+  }
+
+  &__list {
+    .active-chat {
+      border: 1px solid revar(--bs-primary) !important;
+      background-color: var(--bs-secondary);
+      color: white;
+    }
+
+    button {
+      width: 100%;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      padding: 5px 10px;
+      font-size: 14px;
+      text-transform: capitalize;
+    }
+  }
+}

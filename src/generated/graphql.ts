@@ -202,6 +202,11 @@ export enum UserRole {
   User = 'user'
 }
 
+export type ChatsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ChatsQuery = { __typename?: 'Query', myChats: Array<{ __typename?: 'ChatBasic', id: string, title: string, createdAt: any }> };
+
 export type LogoutMutationVariables = Exact<{
   refreshToken: Scalars['String'];
 }>;
@@ -221,6 +226,26 @@ export type UserProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type UserProfileQuery = { __typename?: 'Query', userProfile: { __typename?: 'User', id: string, email: string, dateJoined?: any | null, lastLogin?: any | null, isActive?: boolean | null, role?: UserRole | null, isSuperadmin?: boolean | null, isAdmin?: boolean | null } };
 
+export const ChatsDocument = gql`
+    query Chats {
+  myChats {
+    id
+    title
+    createdAt
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class ChatsGQL extends Apollo.Query<ChatsQuery, ChatsQueryVariables> {
+    override document = ChatsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const LogoutDocument = gql`
     mutation Logout($refreshToken: String!) {
   logout(refreshToken: $refreshToken)

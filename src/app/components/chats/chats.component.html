@@ -1,4 +1,19 @@
-<p>chats works!</p>
-<div *ngFor="let item of ['1', '2', '3', '4', '5']">
-  <button type="button" (click)="setChatId(item)">{{ item }}</button>
+<div id="chat__container">
+  <div>
+    <p class="display-6">Chats</p>
+  </div>
+
+  <div id="chat__empty" *ngIf="!(myChats$ | async)?.length">
+    <p>No chats available</p>
+  </div>
+
+  <div id="chat__list" *ngFor="let item of myChats$ | async">
+    <button
+      type="button"
+      [class]="{ 'active-chat': item.id === chatId }"
+      (click)="setChatId(item.id)"
+    >
+      {{ item.title }}
+    </button>
+  </div>
 </div>

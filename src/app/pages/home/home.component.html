@@ -1,6 +1,9 @@
 <div id="home__container">
   <div id="home__chat__list">
-    <app-chats (setChatIdEvent)="setChatId($event)"></app-chats>
+    <app-chats
+      (setChatIdEvent)="setChatId($event)"
+      [chatId]="chatId"
+    ></app-chats>
   </div>
   <div id="home__messages">
     <app-messages [chatId]="chatId"></app-messages>
