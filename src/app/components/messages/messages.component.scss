@@ -1,0 +1,45 @@
+#message {
+
+
+  &__container {
+    height: 100%;
+    padding: 10px;
+
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    p {
+      padding: 0;
+      margin: 0;
+    }
+
+    hr {
+      margin: 7px 0;
+    }
+
+    .message {
+      &__body {
+        border: 1px solid var(--bs-secondary);
+        border-radius: 5px;
+        padding: 5px;
+
+        &__content {
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        &__author {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+}

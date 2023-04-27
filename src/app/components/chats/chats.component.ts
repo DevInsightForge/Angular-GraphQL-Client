@@ -9,7 +9,7 @@ import { ChatBasic, ChatsGQL } from "../../../generated/graphql";
 })
 export class ChatsComponent {
   @Output() setChatIdEvent = new EventEmitter<string>();
-  @Input() chatId: string | null = null;
+  @Input() chatId: string = "";
 
   myChats$: Observable<ChatBasic[]> = of([]);
 

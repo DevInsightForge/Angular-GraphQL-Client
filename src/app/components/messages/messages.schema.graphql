@@ -1,0 +1,20 @@
+query GetChatMessages($chatId: String!) {
+  getChat(chatId: $chatId) {
+    id
+    title
+    createdAt
+    participants {
+      id
+      email
+    }
+    messages {
+      id
+      content
+      sentAt
+      user {
+        id
+        email
+      }
+    }
+  }
+}

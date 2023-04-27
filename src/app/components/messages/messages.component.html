@@ -1,2 +1,24 @@
-<p>messages works!</p>
-<p>{{ chatId }}</p>
+<div id="message__container" *ngIf="chatId !== ''">
+  <div>
+    <p class="display-6">Messages</p>
+  </div>
+
+  <div id="message__empty" *ngIf="!(messages$ | async)?.length">
+    <p>No chats available</p>
+  </div>
+
+  <div id="message__list">
+    <div class="message__body" *ngFor="let item of messages$ | async">
+      <p class="message__body__content">
+        {{ item.content }}
+      </p>
+      <hr />
+      <div class="message__body__author">
+        <p>
+          {{ item?.sentAt | amTimeAgo }}
+        </p>
+        <p>{{ item.user.email }}</p>
+      </div>
+    </div>
+  </div>
+</div>

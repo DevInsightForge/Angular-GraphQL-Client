@@ -207,6 +207,13 @@ export type ChatsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ChatsQuery = { __typename?: 'Query', myChats: Array<{ __typename?: 'ChatBasic', id: string, title: string, createdAt: any }> };
 
+export type GetChatMessagesQueryVariables = Exact<{
+  chatId: Scalars['String'];
+}>;
+
+
+export type GetChatMessagesQuery = { __typename?: 'Query', getChat: { __typename?: 'Chat', id: string, title: string, createdAt: any, participants: Array<{ __typename?: 'UserBasic', id: string, email: string }>, messages: Array<{ __typename?: 'Message', id: string, content: string, sentAt: any, user: { __typename?: 'UserBasic', id: string, email: string } }> } };
+
 export type LogoutMutationVariables = Exact<{
   refreshToken: Scalars['String'];
 }>;
@@ -241,6 +248,39 @@ export const ChatsDocument = gql`
   })
   export class ChatsGQL extends Apollo.Query<ChatsQuery, ChatsQueryVariables> {
     override document = ChatsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetChatMessagesDocument = gql`
+    query GetChatMessages($chatId: String!) {
+  getChat(chatId: $chatId) {
+    id
+    title
+    createdAt
+    participants {
+      id
+      email
+    }
+    messages {
+      id
+      content
+      sentAt
+      user {
+        id
+        email
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetChatMessagesGQL extends Apollo.Query<GetChatMessagesQuery, GetChatMessagesQueryVariables> {
+    override document = GetChatMessagesDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

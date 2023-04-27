@@ -7,13 +7,15 @@
     <p>No chats available</p>
   </div>
 
-  <div id="chat__list" *ngFor="let item of myChats$ | async">
-    <button
-      type="button"
-      [class]="{ 'active-chat': item.id === chatId }"
-      (click)="setChatId(item.id)"
-    >
-      {{ item.title }}
-    </button>
+  <div id="chat__list">
+    <div *ngFor="let item of myChats$ | async">
+      <button
+        type="button"
+        [class]="{ 'active-chat': item.id === chatId }"
+        (click)="setChatId(item.id)"
+      >
+        {{ item.title }}
+      </button>
+    </div>
   </div>
 </div>
